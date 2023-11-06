@@ -1,0 +1,59 @@
+README YELP
+
+The Comet Link and Experiment Hashes are given below.
+
+Comet Links: https://www.comet.ml/qiki6bsb/final-project-cs-1460/view/new
+
+Experiment Hashes:
+
+BERT Training: 1c17f77b172b4fe688cbd20fc7382879
+
+BERT Testing: 3c2bfb4a6f0e4b01a408418b49379274
+
+LSTM Training and Testing: a32f1f31497d4867b6ff22ba1a92d5e8
+
+Multinomial Naive Bayes Testing (MNB): f629a3c27dff4a869b406a4144e24d34
+
+Note that MNB does not use a loss function to train, it simply calculates the frequency
+of each word in the training data for each class. Hence a training loss graph does not
+exist for MNB.
+
+
+RUN Instructions:
+
+The yelp.py takes 4 arguments - train_data, test_data, model_id, num_epochs
+The LSTM has model_id = 0 and BERT has model_id = 1.
+
+
+To run the LSTM model:
+python yelp.py -Tt train_data test_data 0 1
+
+
+To train and test the BERT model:
+python yelp.py -Tt train_data test_data 1 1
+
+
+The nbyelp.py takes 2 arguments - train_data,test_data
+
+To run Mutlinomial Naive Bayes:
+python nbyelp.py -Tt train_data test_data
+
+
+Training and Testing time:
+
+The LSTM model takes 2 minutes to train and test.
+
+The BERT model takes 35 minutes to train and test.
+
+The Naive Bayes model takes 7 minutes to train and test.
+
+
+Hyperparameter Justification:
+I experimented with learning rates betweeen 0.01 and 0.005 for the LSTM model and found that 
+a learning rate of 0.001 was optimal. Furthermore, I found an embedding size of 360 worked well.
+For BERT, I tried learning rates between 1e-02 and 1e-6, and found that learning rate of 1e-05 
+achieved the best trade off between training time and loss. I used a batch size of 40,as it was 
+the largest batch size I could use without getting CUDA out of memory error. Finally, I used a 
+window size of 150, meaning that I only used the first 150 words of a review. Most reviews had
+fewer than 150 words, and I found that increasing the window size did not improve performance.
+
